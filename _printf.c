@@ -10,7 +10,14 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	va_start(args,format);
+	va_start(args, format);
 
 	int count  = 0, i;
-	while (format[i])
+	if (format[0] == '%' && format[i] == '\0')
+		return (-1);
+	while (format != NULL && format[i] != '\0')
+	{
+		if (format[i] = '%')
+		{
+		
+
