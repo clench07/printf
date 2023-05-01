@@ -1,21 +1,21 @@
 #include "main.h"
+#include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
 
 /**
- * _printf - prints char , int etc 
+ * _printf - prints both char and int
  * @format: pointer to string that contains the format specifier
  * Return: number of characters to be printed
  */
 
 int _printf(const char *format, ...)
 {
-	int count  = 0, i;
-	int (*c)(va_list);
+	int count  = 0, i = 0;
+	int (*f)(va_list);
 	va_list args;
+
 	va_start(args, format);
-
-
 	if (format[0] == '%' && format[i] == '\0')
 		return (-1);
 	while (format != NULL && format[i] != '\0')
@@ -25,10 +25,10 @@ int _printf(const char *format, ...)
 			count += _putchar(format[i]);
 			i += 2;
 		}
-		else 
+		else
 		{
-			c = get_func(format[i + 1]);
-			if (c)
+			f = get_func(format[i + 1]);
+			if (f)
 				count += c(args);
 			else
 				count = _putchar(format[i]) + _putchar(format[i + 1]);
@@ -43,5 +43,3 @@ int _printf(const char *format, ...)
 	va_end(args);
 	return (count);
 }
-		
-
