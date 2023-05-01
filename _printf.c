@@ -11,14 +11,14 @@
 
 int _printf(const char *format, ...)
 {
-	int count  = 0, i = 0;
+	int count = 0, i = 0;
 	int (*f)(va_list);
 	va_list args;
 
-	va_start(args, format);
-
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
+
+	va_start(args, format);
 
 	while (format[i] != '\0')
 	{
@@ -33,10 +33,16 @@ int _printf(const char *format, ...)
 			{
 				f = get_func(format[i + 1]);
 				if (f)
+				{
 					count += f(args);
+					i += 2;
+				}
 				else
-					count = _putchar('&') + _putchar(format[i + 1]);
-				i += 2;
+				{
+					count += _putchar('%');
+					count += _putchar(format[i + 1]);
+					i += 2;
+				}
 			}
 		}
 		else
@@ -45,6 +51,8 @@ int _printf(const char *format, ...)
 			i++;
 		}
 	}
+
 	va_end(args);
+
 	return (count);
 }
