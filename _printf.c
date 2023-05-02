@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include "main.h"
 /**
- * _printf - prints anything
+ * _printf - prints char and int
  * @format: pointer to string that contains specifiers
  * Return: number of characters printed
  **/
